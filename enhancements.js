@@ -28,47 +28,54 @@ const bookCovers=[
     ],
     alts:['The Art of Problem Solving, Volume 1 cover','The Art of Problem Solving, Volume 2 cover'],
     titles:['AoPS Volume 1','AoPS Volume 2'],
+    backups:['https://books.google.com/books/content?id=1_MWAAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api',null],
     edition:'Volumes 1 & 2 · 7th edition covers'
   },
   {
     urls:['https://covers.openlibrary.org/b/isbn/9781934124048-L.jpg'],
     alts:['Intermediate Algebra by Richard Rusczyk and Mathew Crawford book cover'],
     titles:['Intermediate Algebra'],
+    backups:['https://books.google.com/books/content?id=vNmNngEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'],
     edition:'AoPS · Richard Rusczyk & Mathew Crawford'
   },
   {
     urls:['https://covers.openlibrary.org/b/isbn/9781934124062-L.jpg'],
     alts:['Intermediate Counting & Probability by David Patrick book cover'],
     titles:['Intermediate Counting & Probability'],
+    backups:[null],
     edition:'AoPS · David Patrick'
   },
   {
     urls:['https://covers.openlibrary.org/b/isbn/9780070856134-L.jpg'],
     alts:['Principles of Mathematical Analysis by Walter Rudin, third edition book cover'],
     titles:['Principles of Mathematical Analysis'],
+    backups:['https://books.google.com/books/content?id=kwqzPAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'],
     edition:'Walter Rudin · 3rd edition'
   },
   {
     urls:['https://covers.openlibrary.org/b/isbn/9781305480513-L.jpg'],
     alts:['Calculus by James Stewart, eighth edition book cover'],
     titles:['Calculus'],
+    backups:['https://books.google.com/books/content?id=spiaBAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'],
     edition:'James Stewart · 8th edition'
   },
   {
     urls:['https://covers.openlibrary.org/b/isbn/9780135851258-L.jpg'],
     alts:['Linear Algebra and Its Applications by Lay, Lay and McDonald, sixth edition book cover'],
     titles:['Linear Algebra and Its Applications'],
+    backups:['https://books.google.com/books/content?id=3eY3EAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api'],
     edition:'Lay, Lay & McDonald · 6th edition'
   }
 ];
 
 function coverFallback(title){
-  const fallback=document.createElement('div');
-  fallback.className='book-cover-fallback';
-  fallback.setAttribute('role','img');
-  fallback.setAttribute('aria-label',`${title} cover`);
-  fallback.innerHTML=`<span>BOOK / COVER</span><strong>${title}</strong><small>Cover preview unavailable</small>`;
-  return fallback;
+  const safe=title.replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[ch]));
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="600" viewBox="0 0 420 600"><rect width="420" height="600" fill="%23d7d9c9"/><rect x="24" y="24" width="372" height="552" fill="none" stroke="%23171714" stroke-width="2"/><text x="42" y="74" font-family="monospace" font-size="18" fill="%23171714">BOOK COVER</text><foreignObject x="42" y="180" width="330" height="220"><div xmlns="http://www.w3.org/1999/xhtml" style="font:700 38px Arial,sans-serif;line-height:1.05;color:%23171714">${safe}</div></foreignObject><text x="42" y="540" font-family="monospace" font-size="14" fill="%2355554e">PREVIEW FALLBACK</text></svg>`;
+  const img=document.createElement('img');
+  img.className='book-cover-fallback-image';
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+  img.alt=`${title} cover preview`;
+  return img;
 }
 
 function updateBookCover(index){
@@ -84,48 +91,65 @@ function updateBookCover(index){
     img.height=380;
     img.decoding='async';
     img.referrerPolicy='no-referrer';
-    img.addEventListener('error',()=>img.replaceWith(coverFallback(selected.titles[i])),{once:true});
+    let usedBackup=false;
+    img.addEventListener('error',()=>{
+      const backup=selected.backups?.[i];
+      if(backup&&!usedBackup){usedBackup=true;img.src=backup;return;}
+      img.replaceWith(coverFallback(selected.titles[i]));
+    });
     stage.appendChild(img);
   });
   $('book-edition').textContent=selected.edition;
 }
 updateBookCover(0);
 
-// Penney's game -------------------------------------------------------
-const sequenceButtons=Array.from(document.querySelectorAll('[data-sequence]'));
-let penneyChoice=null,penneyCounter=null;
-const opposite=flip=>flip==='H'?'T':'H';
-function counterPattern(sequence){return opposite(sequence[1])+sequence.slice(0,2);}
-function chooseSequence(sequence){
-  penneyChoice=sequence;penneyCounter=counterPattern(sequence);
-  sequenceButtons.forEach(button=>button.classList.toggle('selected',button.dataset.sequence===sequence));
-  $('penney-player').textContent=sequence;$('penney-computer').textContent=penneyCounter;
-  $('penney-status').textContent=`You chose ${sequence}. The counter-pattern is ${penneyCounter}.`;
-  $('penney-run').disabled=false;$('penney-result').hidden=true;
+// Lost boarding pass paradox -------------------------------------------
+const paradoxButtons=Array.from(document.querySelectorAll('[data-paradox-answer]'));
+let paradoxChoice=null;
+function formatParadoxChoice(value){
+  if(Math.abs(value-.01)<.005)return '1 / 100';
+  if(Math.abs(value-1/3)<.01)return '1 / 3';
+  return '1 / 2';
 }
-function racePatterns(a,b){
-  let trail='';
-  for(let toss=0;toss<500;toss++){
-    trail+=(Math.random()<.5?'H':'T');if(trail.length>3)trail=trail.slice(-3);
-    if(trail===a)return 'player';if(trail===b)return 'counter';
+function chooseParadoxAnswer(value,button){
+  paradoxChoice=Number(value);
+  paradoxButtons.forEach(b=>b.classList.toggle('selected',b===button));
+  $('paradox-status').textContent=`You chose ${formatParadoxChoice(paradoxChoice)}. Now let 1,000 planes board.`;
+  $('paradox-run').disabled=false;
+  $('paradox-result').hidden=true;
+}
+function simulateBoardingPass(trials=1000){
+  let lastGetsOwnSeat=0;
+  for(let trial=0;trial<trials;trial++){
+    const empty=Array.from({length:100},(_,i)=>i);
+    const firstChoice=Math.floor(Math.random()*empty.length);
+    empty.splice(firstChoice,1);
+    for(let passenger=1;passenger<99;passenger++){
+      const ownIndex=empty.indexOf(passenger);
+      if(ownIndex!==-1){
+        empty.splice(ownIndex,1);
+      }else{
+        empty.splice(Math.floor(Math.random()*empty.length),1);
+      }
+    }
+    if(empty[0]===99)lastGetsOwnSeat++;
   }
-  return 'counter';
+  return {lastGetsOwnSeat,trials};
 }
-function simulatePenney(rounds=1000){
-  let player=0,counter=0;
-  for(let i=0;i<rounds;i++)racePatterns(penneyChoice,penneyCounter)==='player'?player++:counter++;
-  return {player,counter,rounds};
-}
-sequenceButtons.forEach(button=>button.addEventListener('click',()=>chooseSequence(button.dataset.sequence)));
-$('penney-run')?.addEventListener('click',()=>{
-  if(!penneyChoice)return;
-  const r=simulatePenney();const pct=r.counter/r.rounds*100;
-  $('penney-result').hidden=false;
-  $('penney-result').innerHTML=`<strong>${penneyCounter}</strong> won ${r.counter.toLocaleString()} of ${r.rounds.toLocaleString()} races <span>(${pct.toFixed(1)}%)</span>. Re-run it and the exact number will move, but the structural advantage remains.`;
+paradoxButtons.forEach(button=>button.addEventListener('click',()=>chooseParadoxAnswer(button.dataset.paradoxAnswer,button)));
+$('paradox-run')?.addEventListener('click',()=>{
+  if(paradoxChoice===null)return;
+  const r=simulateBoardingPass(1000),pct=r.lastGetsOwnSeat/r.trials*100;
+  const correct=Math.abs(paradoxChoice-.5)<.01;
+  $('paradox-result').hidden=false;
+  $('paradox-result').innerHTML=`<strong>The answer is 1 / 2.</strong> Your instinct was ${formatParadoxChoice(paradoxChoice)}. In this run, Passenger 100 got Seat 100 on ${r.lastGetsOwnSeat.toLocaleString()} of ${r.trials.toLocaleString()} flights (${pct.toFixed(1)}%). ${correct?'Your first guess matched the paradox.':'The surprising part is that all the intermediate chaos collapses to a race between Seat 1 and Seat 100.'}`;
 });
-$('penney-reset')?.addEventListener('click',()=>{
-  penneyChoice=penneyCounter=null;sequenceButtons.forEach(button=>button.classList.remove('selected'));
-  $('penney-player').textContent='—';$('penney-computer').textContent='—';$('penney-status').textContent='Pick any three-flip pattern.';$('penney-run').disabled=true;$('penney-result').hidden=true;
+$('paradox-reset')?.addEventListener('click',()=>{
+  paradoxChoice=null;
+  paradoxButtons.forEach(button=>button.classList.remove('selected'));
+  $('paradox-status').textContent='Pick the answer that seems most intuitive.';
+  $('paradox-run').disabled=true;
+  $('paradox-result').hidden=true;
 });
 
 // Four-state Markov chain --------------------------------------------
@@ -224,7 +248,7 @@ if(competitionTimeline&&!reducedMotion.matches){
 // Section entrances ---------------------------------------------------
 if(!reducedMotion.matches&&'IntersectionObserver' in window){
   const revealObserver=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target);}});},{threshold:.06,rootMargin:'0px 0px -35px 0px'});
-  document.querySelectorAll('.hero-top,.hero h1,.hero-bottom,.section-head,.knowledge,.subhead,.books-layout,.probability-game,.cs-stack,.research-feature,.project,.project-rows article,.hackathons,.results,.market-panel,.wharton,.markov-panel,.sim-panel,.current-work,.experience-list article,.academic-stats,.coursework').forEach((node,i)=>{
+  document.querySelectorAll('.hero-top,.hero h1,.hero-bottom,.section-head,.knowledge,.subhead,.books-layout,.probability-game,.cs-stack,.research-feature,.project,.project-rows article,.results,.market-panel,.wharton,.markov-panel,.sim-panel,.current-work,.experience-list article,.academic-stats,.coursework').forEach((node,i)=>{
     if(node.parentElement.closest('.probability-game,.markov-panel,.sim-panel,.research-feature'))return;
     node.classList.add('reveal');if(node.matches('.probability-game,.market-panel,.markov-panel,.sim-panel,.project'))node.classList.add('reveal-scale');if(node.matches('.project,.project-rows article'))node.style.setProperty('--reveal-delay',(i%2)*90+'ms');revealObserver.observe(node);
   });

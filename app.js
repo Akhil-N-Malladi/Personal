@@ -2,19 +2,19 @@
 const $ = (id) => document.getElementById(id);
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const books = [
-  ['The Art of Problem Solving', 'Volumes 1 & 2 · AoPS', 'A broad foundation in algebra, geometry, number theory, counting, and problem-solving techniques.'],
-  ['Intermediate Algebra', 'AoPS', 'Polynomials, complex numbers, sequences, inequalities, and the algebra behind challenging problems.'],
-  ['Intermediate Counting & Probability', 'AoPS', 'Combinatorial reasoning, counting methods, probability, and the art of choosing the right approach.'],
-  ['Principles of Mathematical Analysis', 'Walter Rudin', 'A rigorous treatment of limits, continuity, differentiation, integration, and sequences of functions.'],
-  ['Calculus', 'James Stewart', 'Single-variable and multivariable calculus, through partial derivatives, multiple integrals, and vector calculus.'],
-  ['Linear Algebra and Its Applications', 'Linear algebra', 'Systems of equations, vector spaces, linear transformations, eigenvalues, and their applications.']
+  ['The Art of Problem Solving', 'Volumes 1 & 2 · AoPS', 'A problem-solving foundation built around algebra, geometry, number theory, counting, and inventive strategies.'],
+  ['Intermediate Algebra', 'AoPS', 'A deeper look at algebraic structure, including polynomials, complex numbers, inequalities, sequences, and functional reasoning.'],
+  ['Intermediate Counting & Probability', 'AoPS', 'Combinatorics and probability through careful counting, casework, recurrences, and problems where the main challenge is choosing the right viewpoint.'],
+  ['Principles of Mathematical Analysis', 'Walter Rudin', 'A rigorous introduction to analysis, with precise treatments of limits, continuity, sequences, differentiation, and integration.'],
+  ['Calculus', 'James Stewart', 'A broad calculus reference covering single-variable and multivariable ideas, from derivatives and integrals through vector calculus.'],
+  ['Linear Algebra and Its Applications', 'Lay, Lay & McDonald', 'Vectors, matrices, transformations, eigenvalues, and the geometric structure behind systems of linear equations.']
 ];
 let currentBook = 0;
 function selectBook(index) {
   currentBook = (index + books.length) % books.length;
   const [title, author, description] = books[currentBook];
   $('book-count').textContent = `${String(currentBook + 1).padStart(2, '0')} / 06`;
-  $('book-title').textContent = title; $('book-author').textContent = author; if (typeof updateBookCover === 'function') updateBookCover(currentBook);
+  $('book-title').textContent = title; $('book-author').textContent = author; $('book-description').textContent = description; if (typeof updateBookCover === 'function') updateBookCover(currentBook);
   document.querySelectorAll('[data-book]').forEach((button, i) => {button.classList.toggle('selected', i === currentBook); button.setAttribute('aria-pressed', String(i === currentBook));});
 }
 document.querySelectorAll('[data-book]').forEach(button => ['click','pointerenter','focus'].forEach(event=>button.addEventListener(event, () => selectBook(Number(button.dataset.book)))));
@@ -106,7 +106,7 @@ function runSimulation(animate=true){
 function updateAssumptions(){ $('drift-value').textContent=$('drift').value+'%';$('volatility-value').textContent=$('volatility').value+'%';if(simulation&&!simulationRunning)$('sim-status').textContent='Assumptions changed. Run again to update the paths.';}
 ['drift','volatility','paths'].forEach(id=>$(id).addEventListener('input',updateAssumptions));
 $('run-sim').addEventListener('click',()=>runSimulation());
-$('reset-sim').addEventListener('click',()=>{cancelAnimationFrame(animationId);simulationRunning=false;['drift','volatility','paths'].forEach(id=>$(id).disabled=false);simulation=null;frame=0;$('drift').value='8';$('volatility').value='25';$('paths').value='100';updateAssumptions();$('run-sim').disabled=false;$('run-sim').textContent='Run simulation';$('sample-value').textContent='z = +0.000';$('sample-day').textContent='Ready to sample';['sim-low','sim-median','sim-high'].forEach(id=>$(id).textContent='—');$('sim-status').textContent='Choose your assumptions and run the simulation.';canvas.setAttribute('aria-label','Monte Carlo simulated stock paths over one year. Ready to run.');drawSimulation(0);});
+$('reset-sim').addEventListener('click',()=>{cancelAnimationFrame(animationId);simulationRunning=false;['drift','volatility','paths'].forEach(id=>$(id).disabled=false);simulation=null;frame=0;$('drift').value='8';$('volatility').value='25';$('paths').value='100';updateAssumptions();$('run-sim').disabled=false;$('run-sim').textContent='Run simulation';$('sample-value').textContent='z = +0.000';$('sample-day').textContent='Ready to sample';['sim-low','sim-median','sim-high'].forEach(id=>$(id).textContent='-');$('sim-status').textContent='Choose your assumptions and run the simulation.';canvas.setAttribute('aria-label','Monte Carlo simulated stock paths over one year. Ready to run.');drawSimulation(0);});
 if('ResizeObserver' in window)new ResizeObserver(()=>drawSimulation(frame)).observe(canvas);else window.addEventListener('resize',()=>drawSimulation(frame));
 window.addEventListener('themechange',()=>drawSimulation(frame));
 drawSimulation(0);
