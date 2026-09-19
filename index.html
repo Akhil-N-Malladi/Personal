@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Akhil | Math, Code & Markets</title>
+  <meta name="description" content="Akhil's work in mathematics, computer science, quantitative finance and research. Explore the books, competitions and models behind it.">
+  <meta name="theme-color" content="#f7f7f2" id="theme-color">
+  <script>(function(){try{var saved=localStorage.getItem("akhil-theme");var dark=saved?saved==="dark":window.matchMedia("(prefers-color-scheme: dark)").matches;document.documentElement.dataset.theme=dark?"dark":"light";}catch(e){}})();</script>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23f34c28' d='M0 0h40v40H0z'/%3E%3Ctext x='7' y='31' font-family='Arial' font-weight='900' font-size='31' fill='%23141414'%3EA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="enhancements.css"><script src="app.js" defer></script><script src="enhancements.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="wordmark" href="#home" aria-label="Akhil, home">A.</a>
+  <nav aria-label="Main navigation"><a href="#math">Math<span>01</span></a><a href="#cs">CS<span>02</span></a><a href="#finance">Finance<span>03</span></a><a href="#experience">Experience</a><a href="#academics">Academics</a></nav><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><span class="theme-toggle-icon" aria-hidden="true"></span><span class="theme-toggle-text">Dark</span></button>
+</header>
+<main id="main">
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-top"><span class="eyebrow">Student / Builder / Researcher</span><span class="eyebrow">Selected work & interests</span></div>
+    <h1 id="hero-title">AKHIL<span class="period">.</span></h1>
+    <div class="hero-bottom">
+      <div class="intro"><h2>I like problems<br>that cross disciplines.</h2><p>I study mathematics, build with code, and explore financial markets. My work connects theory with things I can test.</p><div class="hero-links"><a href="#math">01 &nbsp; Math</a><a href="#cs">02 &nbsp; CS</a><a href="#finance">03 &nbsp; Finance</a></div></div>
+      <div class="portrait" role="img" aria-label="Placeholder for a portrait of Akhil"><span class="eyebrow">Portrait / 01</span><span class="portrait-center">Photo<br>goes here.</span><span class="portrait-bottom">Akhil <span>4 : 5</span></span></div>
+    </div>
+  </section>
+
+  <section class="chapter" id="math" aria-labelledby="math-title">
+    <div class="section-head"><span class="eyebrow">01 / Mathematics</span><h2 id="math-title">Start with<br>the proof.</h2><p>From competition problems to the structure behind them.</p></div>
+    <div class="knowledge"><div><span class="eyebrow">My foundation</span><p>Calculus III<br>Discrete mathematics<br>Real analysis<br>Linear algebra</p></div><div class="learning"><span class="eyebrow">Currently learning</span><p>Abstract<br>algebra<span class="small-period">.</span></p></div></div>
+    <div class="subhead"><h3>Off the bookshelf</h3><span class="eyebrow">Hover or tap a spine</span></div>
+    <div class="books-layout">
+      <div class="book-stack" aria-label="Books I have studied">
+        <button class="book selected" data-book="0" aria-pressed="true"><span>01</span><strong>The Art of Problem Solving</strong><small>Volumes 1 & 2</small></button>
+        <button class="book" data-book="1" aria-pressed="false"><span>02</span><strong>Intermediate Algebra</strong><small>AoPS</small></button>
+        <button class="book" data-book="2" aria-pressed="false"><span>03</span><strong>Intermediate Counting & Probability</strong><small>AoPS</small></button>
+        <button class="book" data-book="3" aria-pressed="false"><span>04</span><strong>Principles of Mathematical Analysis</strong><small>Rudin</small></button>
+        <button class="book" data-book="4" aria-pressed="false"><span>05</span><strong>Calculus</strong><small>Stewart</small></button>
+        <button class="book" data-book="5" aria-pressed="false"><span>06</span><strong>Linear Algebra and Its Applications</strong><small>Linear algebra</small></button>
+      </div>
+      <div class="book-detail" aria-live="polite"><span id="book-count" class="eyebrow">01 / 06</span><h4 id="book-title">The Art of Problem Solving</h4><p id="book-author" class="book-author">Volumes 1 & 2 · AoPS</p><div id="book-cover-stage" class="book-cover-stage"></div><span id="book-edition" class="book-edition"></span><div class="book-controls"><button id="book-prev" aria-label="Previous book">Previous</button><button id="book-next" aria-label="Next book">Next</button></div></div>
+    </div>
+
+    <div class="probability-game" id="math-lab">
+      <div class="probability-intro"><span class="eyebrow">A less-famous probability game</span><h3>Can your coin pattern be beaten?</h3><p>In Penney’s game, two three-flip patterns race to appear first in a stream of fair coin tosses. The strange part: after you choose, a second player can always choose a pattern with an advantage.</p><a class="text-link" href="https://en.wikipedia.org/wiki/Penney%27s_game" target="_blank" rel="noopener noreferrer">Read about Penney’s game</a></div>
+      <div class="probability-play penney-play">
+        <span class="eyebrow">Choose your sequence</span>
+        <div class="sequence-grid" id="sequence-grid" aria-label="Choose a three-flip heads and tails sequence">
+          <button data-sequence="HHH">HHH</button><button data-sequence="HHT">HHT</button><button data-sequence="HTH">HTH</button><button data-sequence="HTT">HTT</button>
+          <button data-sequence="THH">THH</button><button data-sequence="THT">THT</button><button data-sequence="TTH">TTH</button><button data-sequence="TTT">TTT</button>
+        </div>
+        <div class="penney-matchup" aria-live="polite"><div><span>You</span><strong id="penney-player">—</strong></div><div class="versus">vs</div><div><span>Counter-pattern</span><strong id="penney-computer">—</strong></div></div>
+        <p id="penney-status" class="monty-status" role="status">Pick any three-flip pattern.</p>
+        <div class="monty-actions"><button id="penney-run" class="primary-button" disabled>Run 1,000 races</button><button id="penney-reset" class="secondary-button">Reset</button></div>
+        <div id="penney-result" class="monty-batch-result" hidden aria-live="polite"></div>
+        <details><summary>What is the trick?</summary><p>The counter-pattern uses overlap. If your pattern is ABC, a strong reply is the opposite of B followed by AB. That makes the opponent’s pattern more likely to complete first, even though every individual toss is still fair.</p></details>
+      </div>
+    </div>
+    <div class="subhead timeline-heading"><h3>A competition timeline</h3><span class="eyebrow">The path branches as you scroll</span></div>
+    <div class="timeline timeline-tree" id="competition-timeline">
+      <div class="timeline-spine" aria-hidden="true"><span></span></div>
+      <article class="timeline-node branch-left" style="--branch-progress:0"><span class="grade">07</span><div><span class="eyebrow">7th grade</span><h4>The first team</h4><p>Joined the school math competition club as one of 20 students selected.</p></div><span class="timeline-score">1 of 20</span></article>
+      <article class="timeline-node branch-right" style="--branch-progress:0"><span class="grade">08</span><div><span class="eyebrow">8th grade</span><h4>AMC 8</h4><p>Scored 17.</p></div><span class="timeline-score">17</span></article>
+      <article class="timeline-node branch-left" style="--branch-progress:0"><span class="grade">09</span><div><span class="eyebrow">9th grade</span><h4>AMC 10</h4><p>Scored 75.</p></div><span class="timeline-score">75</span></article>
+      <article class="timeline-node branch-right" style="--branch-progress:0"><span class="grade">10</span><div><span class="eyebrow">10th grade</span><h4>AMC 10 → AIME</h4><p>Scored 99 and qualified for AIME.</p></div><span class="timeline-score">99</span></article>
+      <article class="timeline-node branch-left timeline-highlight" style="--branch-progress:0"><span class="grade">11</span><div><span class="eyebrow">11th grade</span><h4>AMC 12 & AIME</h4><p>Scored 123 on AMC 12 and 8 on AIME. Top 15% of AIME scorers.</p></div><span class="timeline-score"><span class="count-up" data-count-to="123">0</span><span>AMC 12</span><b>8 <small>AIME</small></b></span></article>
+    </div>
+  </section>
+
+  <section class="chapter" id="cs" aria-labelledby="cs-title">
+    <div class="section-head"><span class="eyebrow">02 / Computer science</span><h2 id="cs-title">Make the<br>idea run<span class="terminal-cursor" aria-hidden="true">_</span><span class="sr-only">.</span></h2><p>Tools that turn messy information into something useful.</p></div>
+    <div class="subhead"><h3>My stack</h3><span class="eyebrow">Languages & applications</span></div>
+    <div class="cs-stack"><article><span class="eyebrow">01 / Java</span><h3>Java</h3><p>Algorithmic problem solving</p><strong class="stack-achievement">USACO Silver</strong></article><article><span class="eyebrow">02 / Python</span><h3>Python</h3><ul><li>Machine learning</li><li>Automation</li><li>Web scraping</li><li>Mathematical modeling</li></ul></article></div>
+    <article class="research-feature"><div class="research-heading"><span class="eyebrow">ML × Biology / UNT</span><h3>From data to<br>public action.</h3><p>I researched machine learning and biology at UNT, an R1 university, and published three papers across three Q2 journals.</p></div><div class="research-papers"><div><span>01</span><h4>The dataset</h4><p>A descriptor documenting the research dataset.</p></div><div><span>02</span><h4>The analysis</h4><p>An analysis of disease spread using machine learning.</p></div><div><span>03</span><h4>The response</h4><p>Recommendations for government action based on the findings.</p></div></div><div class="research-award"><strong>1st place</strong><span>TXSEF category winner<br><b>Computational Epidemiology</b></span></div></article>
+    <div class="subhead"><h3>Two wins. Two builds.</h3><span class="eyebrow">CAC winner × 2</span></div>
+    <div class="projects">
+      <article class="project"><div class="project-image" role="img" aria-label="Placeholder for first CAC winning website screenshot"><span class="eyebrow">Website / 01</span><span>Screenshot<br>coming soon.</span><small>Image placeholder</small></div><div class="project-caption"><h4>CAC winning website</h4><span>01</span></div></article>
+      <article class="project"><div class="project-image second" role="img" aria-label="Placeholder for second CAC winning website screenshot"><span class="eyebrow">Website / 02</span><span>Screenshot<br>coming soon.</span><small>Image placeholder</small></div><div class="project-caption"><h4>CAC winning website</h4><span>02</span></div></article>
+    </div>
+    <div class="project-rows"><article><span class="eyebrow">Data & models</span><h3>Market research tools</h3><p>I build browser-based web scrapers and mathematical models to support stock research and risk analysis.</p><a class="text-link" href="#finance">Explore the finance work</a></article><article><span class="eyebrow">Automation</span><h3>Grades, without the busywork</h3><p>I built a script that scrapes grades, uploads them to Google Sheets, and runs regression and other calculations.</p><div class="pipeline"><span>Grades</span><span>Google Sheets</span><span>Analysis</span></div></article></div>
+    <div class="hackathons"><h3>At the hackathon</h3><div><span>hackTAMS</span><span>NTHS hack</span><span>iUrban Teen AI Hackathon <small>with Microsoft</small></span></div></div>
+  </section>
+
+  <section class="chapter" id="finance" aria-labelledby="finance-title">
+    <div class="section-head"><span class="eyebrow">03 / Finance</span><h2 id="finance-title">Question.<br>Model. Test.</h2><p>I combine quantitative research with team judgment and market timing.</p></div>
+    <div class="results"><article><span class="eyebrow">DECA SMG / 10th grade</span><strong>33<span>/ <span class="count-up" data-count-to="1700" data-count-format="comma" data-count-suffix="+">0</span></span></strong><p>Team finish</p></article><article><span class="eyebrow">DECA SMG / 11th grade</span><strong>12<span>/ <span class="count-up" data-count-to="1600" data-count-format="comma" data-count-suffix="+">0</span></span></strong><p>Team finish · ICDC qualifier</p></article><article class="result-accent"><span class="eyebrow">ICDC / Stock Market Game</span><strong>14<span>/ 100</span></strong><p>ICDC team finish</p></article></div>
+    <div class="market-panel">
+      <div class="chart-heading"><div><span class="eyebrow">11th-grade SMG season</span><h3>Putting conviction<br>into motion.</h3></div><div class="return-stat"><span class="count-up count-up-return" data-count-to="114" data-count-prefix="+" data-count-suffix="%">0</span><span>Reported portfolio growth</span></div></div>
+      <p class="chart-intro">Aggressive investing and careful timing drove our portfolio growth and ICDC qualification.</p>
+      <div class="chart-toolbar"><span class="label">Illustrative trajectory</span><span id="trade-readout">START · 100.0</span></div>
+      <div class="equity-chart"><svg id="equity-svg" viewBox="0 0 1000 330" role="img" aria-labelledby="equity-title equity-desc"><title id="equity-title">Illustrative portfolio trajectory from 100 to 214</title><desc id="equity-desc">A synthetic chart depicting a 114 percent gain. Intermediate values and example trade markers are invented and are not actual trading records.</desc><g id="equity-grid"></g><path id="equity-area"></path><path id="equity-line"></path><g id="trade-markers"></g><line id="equity-cursor"></line><circle id="equity-dot" r="6"></circle></svg></div>
+      <div class="chart-bottom"><span>Season start</span><span>Season end</span></div>
+      <label class="sr-only" for="trade-range">Explore the illustrative season, from start to finish</label><input type="range" id="trade-range" min="0" max="60" value="0">
+      <div class="trade-event" aria-live="polite"><span id="trade-event-number" class="eyebrow">Example / 01</span><strong id="trade-event-title">Build a position</strong><p id="trade-event-text">An illustrative entry before a favorable move. Actual trades have not been supplied.</p></div>
+      <p class="chart-note">Illustration only. The 114% result is supplied; the path, timing, and trade examples are synthetic.</p>
+    </div>
+    <article class="wharton"><div><span class="eyebrow">11th grade / Wharton Global Youth</span><h3>Team leader.<br>Quantitative analyst.</h3><span class="qualification">Semifinalist</span></div><div><p>I directed team strategy and built and validated mathematical and machine learning models to inform risk analysis and investment decisions.</p><p>I also built browser-based web scrapers to process dense historical information quickly.</p><div class="model-tags"><span>Markov chains</span><span>Hidden Markov models</span><span>Monte Carlo</span><span>Granger analysis</span><span>XGBoost</span></div></div></article>
+
+    <div class="markov-panel" id="markov">
+      <div class="subhead"><div><span class="eyebrow">Interactive model / Markov chain</span><h3>The next move<br>starts here.</h3></div><span class="lab-tag">4 STATES</span></div>
+      <p class="markov-intro">Follow the glow. Four abstract states—A, B, C, and D—share a deliberately incomplete transition graph. B is visited most often.</p>
+      <div class="markov-simple-layout"><div class="markov-visual"><div class="markov-readout"><span id="markov-step-count">Step 0</span><span id="markov-state-label">B</span></div><svg id="markov-svg" viewBox="0 0 620 430" role="img" aria-labelledby="markov-title markov-description"><title id="markov-title">Four-state Markov chain</title><desc id="markov-description">A glowing dot travels beneath four abstract nodes labeled A, B, C, and D. Some node pairs have no direct transition. Each destination turns orange on arrival, then fades back.</desc><defs><marker id="markov-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#8b8e82"/></marker><filter id="markov-glow" x="-200%" y="-200%" width="500%" height="500%"><feGaussianBlur stdDeviation="5"/></filter></defs><g id="markov-edges"></g><g id="markov-traveler" pointer-events="none"><circle r="13" fill="#f34c28" opacity=".6" filter="url(#markov-glow)"/><circle r="5" fill="#ff693e"/></g><g id="markov-nodes"></g></svg><div class="markov-actions"><button id="markov-run" class="primary-button">Run</button><button id="markov-step" class="secondary-button">Step</button><button id="markov-reset" class="secondary-button">Reset</button><label for="markov-speed">Speed<select id="markov-speed"><option value="1400">Slow</option><option value="850" selected>Normal</option><option value="400">Fast</option></select></label></div><p id="markov-status" class="chart-note" role="status">Ready. Start at B, or choose a node.</p></div><div class="markov-statistics"><h4>Where it lands</h4><p class="chart-note">Visits include the starting state.</p><div id="markov-visits" class="markov-visits"></div><p class="chart-note">Fixed illustrative probabilities.<br>Not fitted to market data.</p></div></div>
+    </div>
+    <div class="sim-panel" id="simulation">
+      <div class="subhead"><div><span class="eyebrow">Interactive model / Monte Carlo</span><h3>One start.<br>A hundred possible futures.</h3></div><span class="sim-badge">LIVE SIMULATION</span></div>
+      <div class="sim-layout"><div class="sim-controls"><p>Adjust the assumptions. Sample random shocks. Watch the paths unfold.</p><label for="drift">Annual drift <output id="drift-value">8%</output></label><input type="range" id="drift" min="-20" max="40" value="8"><label for="volatility">Annual volatility <output id="volatility-value">25%</output></label><input type="range" id="volatility" min="5" max="70" value="25"><label for="paths">Number of paths</label><select id="paths"><option value="30">30 paths</option><option value="100" selected>100 paths</option><option value="200">200 paths</option></select><button id="run-sim" class="primary-button">Run simulation</button><button id="reset-sim" class="secondary-button">Reset assumptions</button><div class="sampling"><span class="eyebrow">Random draw / path 01</span><strong id="sample-value">z = +0.000</strong><span id="sample-day">Ready to sample</span></div></div>
+      <div class="sim-visual"><div class="chart-toolbar"><span>Start value: 100</span><span>252 trading days ≈ 1 year</span></div><canvas id="sim-canvas" aria-label="Monte Carlo simulated stock paths over one year">Simulated paths from a starting index value of 100.</canvas><div class="sim-axis"><span>Today</span><span>One year</span></div><div class="sim-summary" aria-live="polite"><div><span>10th percentile</span><strong id="sim-low">—</strong></div><div><span>Median ending value</span><strong id="sim-median">—</strong></div><div><span>90th percentile</span><strong id="sim-high">—</strong></div></div><p id="sim-status" class="chart-note" role="status">Choose your assumptions and run the simulation.</p></div></div>
+      <details class="model-details"><summary>What happens inside the model?</summary><p>Each day, each path draws an independent standard normal shock z. The model updates the price using geometric Brownian motion: S(t + Δt) = S(t) × exp[(μ − σ²/2)Δt + σ√Δt × z], with Δt = 1/252. The simulation treats 252 trading days as one year, excluding weekends and market holidays.</p><p>Drift and volatility stay constant. This demonstration does not include market regimes, jumps, fees, or fundamentals. The paths illustrate uncertainty; they are not forecasts or investment recommendations.</p></details>
+    </div>
+    <div class="current-work"><span class="eyebrow">Currently building</span><h3>A quantitative pipeline<br>for live, long-term investing.</h3><span>In progress</span></div>
+  </section>
+
+  <section class="chapter" id="experience" aria-labelledby="experience-title"><div class="section-head compact"><span class="eyebrow">04 / Experience</span><h2 id="experience-title">Beyond<br>the classroom.</h2></div><div class="experience-list"><article><span class="eyebrow">01 / Research internship</span><div><h3>University of North Texas</h3><p>Six-month research internship combining machine learning and biology at an R1 research university.</p></div><span class="experience-label">6 months</span></article><article><span class="eyebrow">02 / Mathematics</span><div><h3>SUMaC</h3><p>Stanford University Mathematics Camp · Track I: Abstract algebra</p></div><span class="experience-label">Summer study</span></article><article><span class="eyebrow">03 / Research</span><div><h3>University of Pennsylvania</h3><p>Game theory research</p></div><span class="experience-label">Game theory</span></article></div></section>
+
+  <section class="chapter academics" id="academics" aria-labelledby="academics-title"><div class="section-head compact"><span class="eyebrow">05 / Academics</span><h2 id="academics-title">The coursework.</h2></div><div class="academic-stats"><div><strong><span class="count-up" data-count-to="4" data-count-decimals="1">0</span></strong><span>Unweighted GPA</span></div><div><strong><span class="count-up" data-count-to="5.359" data-count-decimals="3">0</span></strong><span>Weighted GPA</span></div><div><strong>10<span>/<span class="count-up" data-count-to="576">0</span></span></strong><span>Class rank</span></div><div><strong><span class="count-up" data-count-to="1540">0</span></strong><span>SAT score</span></div></div><div class="coursework"><h3><span>11</span> AP courses</h3><ul><li>Human Geography</li><li>Precalculus</li><li>Computer Science A</li><li>Seminar</li><li>World History</li><li>U.S. History</li><li>Calculus BC</li><li>English Language</li><li>Computer Science Principles</li><li>Research</li><li>Physics 1</li></ul></div></section>
+</main>
+<footer><a class="footer-name" href="#home">AKHIL.</a><span>Math. Code. Markets.</span><a href="#home">Back to top</a></footer>
+</body>
+</html>
